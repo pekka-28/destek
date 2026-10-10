@@ -1,0 +1,7 @@
+{
+  "Comment": "Menu.json - Downloadable boot choices; image paths are relative to this file.",
+  "Items": [
+    { "Key": 1, "Text": "Hello, world!", "Image": "Hello.bin" },
+    { "Key": 3, "Text": "Starting, then Hello", "Image": "HelloStaged.bin" }
+  ]
+}

@@ -1,0 +1,33 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="620" viewBox="0 0 1120 620" role="img" aria-labelledby="title desc">
+  <title id="title">Bootstrap connections</title>
+  <desc id="desc">Two top-to-bottom connections. On the left, Bootstrap-server.ps1 in a Windows host connects through RS-232 to a physical IBM 5150 containing the Option ROM. On the right, a Windows host contains Bootstrap-server.ps1 connected through a named pipe to 86Box, which contains the Option ROM.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#21576c"/></marker></defs>
+  <style>
+    text{font-family:Arial,sans-serif;font-size:23px;fill:#172f39}
+    .host{fill:#eaf3f8;stroke:#467b92;stroke-width:2}
+    .node{fill:white;stroke:#467b92;stroke-width:2}
+    .wire{fill:none;stroke:#21576c;stroke-width:2;marker-start:url(#arrow);marker-end:url(#arrow)}
+    .link{font-size:19px}
+  </style>
+  <rect width="1120" height="620" fill="white"/>
+  <rect class="host" x="30" y="30" width="500" height="210" rx="8"/>
+  <text x="55" y="72">Windows host</text>
+  <rect class="node" x="105" y="115" width="350" height="70" rx="6"/>
+  <text x="280" y="158" text-anchor="middle">Bootstrap-server.ps1</text>
+  <rect class="node" x="105" y="395" width="350" height="150" rx="6"/>
+  <text x="280" y="435" text-anchor="middle">IBM 5150</text>
+  <rect class="node" x="180" y="465" width="200" height="50" rx="5"/>
+  <text x="280" y="497" text-anchor="middle">Option ROM</text>
+  <path class="wire" d="M 280 195 V 385"/>
+  <text class="link" x="300" y="310">RS-232</text>
+  <rect class="host" x="590" y="30" width="500" height="560" rx="8"/>
+  <text x="615" y="72">Windows host</text>
+  <rect class="node" x="665" y="115" width="350" height="70" rx="6"/>
+  <text x="840" y="158" text-anchor="middle">Bootstrap-server.ps1</text>
+  <rect class="node" x="665" y="395" width="350" height="150" rx="6"/>
+  <text x="840" y="435" text-anchor="middle">86Box</text>
+  <rect class="node" x="740" y="465" width="200" height="50" rx="5"/>
+  <text x="840" y="497" text-anchor="middle">Option ROM</text>
+  <path class="wire" d="M 840 195 V 385"/>
+  <text class="link" x="860" y="310">Named pipe</text>
+</svg>

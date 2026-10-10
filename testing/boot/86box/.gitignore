@@ -1,0 +1,11 @@
+# .gitignore
+
+/runtime/
+/source/
+/debug-build/
+/*.zip
+/host.out.log
+/host.err.log
+/bridge.err.log
+/86box.log
+/nvr/

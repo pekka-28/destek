@@ -1,0 +1,11 @@
+{
+    "_comment":  "Hello.json",
+    "Name":  "Hello",
+    "ImagePath":  "../../boot/Hello.bin",
+    "Blocks":  1,
+    "Entry":  31744,
+    "Done":  30,
+    "HelloSegment":  2048,
+    "HelloEntry":  5,
+    "Staged":  false
+}

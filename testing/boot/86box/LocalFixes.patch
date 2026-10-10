@@ -1,0 +1,29 @@
+# LocalFixes.patch
+diff --git a/src/device/serial.c b/src/device/serial.c
+index 0bbb49c..ac76c71 100644
+--- a/src/device/serial.c
++++ b/src/device/serial.c
+@@ -302,7 +302,9 @@ serial_process_txsr(serial_t *dev)
+     serial_transmit(dev, dev->txsr);
+     dev->txsr = 0;
+     dev->txsr_empty = 1;
+-     serial_xmit_d_empty_evt(dev);
++    /* TSR completion sets TEMT, not a second THRE interrupt. */
++    uint8_t holding_empty = dev->fifo_enabled ? fifo_get_empty(dev->xmit_fifo) : dev->thr_empty;
++    dev->lsr = (dev->lsr & ~0x40) | (holding_empty << 6);
+     /* Reset BAUDOUT cycle count. */
+     dev->baud_cycles = 0;
+     /* If FIFO is enabled and there are bytes left to transmit,
+diff --git a/src/gdbstub.c b/src/gdbstub.c
+index dcf5b5f..3448e4c 100644
+--- a/src/gdbstub.c
++++ b/src/gdbstub.c
+@@ -1815,7 +1815,7 @@ gdbstub_init(void)
+     int                port      = 12345;
+     struct sockaddr_in bind_addr = {
+         .sin_family = AF_INET,
+-        .sin_addr   = { .s_addr = INADDR_ANY },
++        .sin_addr   = { .s_addr = htonl(INADDR_LOOPBACK) },
+         .sin_port   = htons(port)
+     };
+     if (bind(gdbstub_socket, (struct sockaddr *) &bind_addr, sizeof(bind_addr)) == -1) {

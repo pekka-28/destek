@@ -1,0 +1,22 @@
+diff --git a/src/device/serial.c b/src/device/serial.c
+--- a/src/device/serial.c
++++ b/src/device/serial.c
+@@ -170,7 +170,8 @@ serial_receive_timer(void *priv)
+ 
+     serial_log("serial_receive_timer()\n");
+ 
+-    timer_on_auto(&dev->receive_timer, /* dev->bits * */ dev->transmit_period);
++    /* Deliver a complete character per receive tick, not one per bit. */
++    timer_on_auto(&dev->receive_timer, (dev->bits ? dev->bits : 1) * dev->transmit_period);
+ 
+     if (dev->char_port.chardev.read) {
+         uint8_t val;
+@@ -389,6 +390,7 @@ serial_update_speed(serial_t *dev)
+ {
+     serial_log("serial_update_speed(%lf)\n", dev->transmit_period);
+-    timer_on_auto(&dev->receive_timer, /* dev->bits * */ dev->transmit_period);
++    /* Keep receive pacing consistent after a baud or format change. */
++    timer_on_auto(&dev->receive_timer, (dev->bits ? dev->bits : 1) * dev->transmit_period);
+ 
+     if (dev->transmit_enabled & 3)
+         timer_on_auto(&dev->transmit_timer, dev->transmit_period);
